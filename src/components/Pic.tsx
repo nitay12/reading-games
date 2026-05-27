@@ -30,6 +30,19 @@ export function Pic({
   color?: string
   size?: number
 }) {
+  if (file.startsWith('http')) {
+    return (
+      <img
+        src={file}
+        width={size}
+        height={size}
+        alt=""
+        draggable={false}
+        style={{ objectFit: 'contain', display: 'inline-block' }}
+      />
+    )
+  }
+
   const c = color ?? colorFor(file)
   const url = iconUrl(file)
   return (

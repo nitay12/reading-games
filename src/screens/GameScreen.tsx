@@ -101,14 +101,6 @@ export function GameScreen({
           {progress.settings.showTranslit && (
             <div className="translit">{round.prompt.translit}</div>
           )}
-          {speech.supported && (
-            <button
-              className="speak-btn"
-              onClick={() => speech.say(round.prompt.audioText ?? round.prompt.text)}
-            >
-              🔊 שְׁמַע
-            </button>
-          )}
         </div>
       )}
 
