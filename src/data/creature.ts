@@ -1,13 +1,14 @@
 import type { CreatureStage } from './types'
 
-// היצור גדל מביצה לחד-קרן קסום ככל שצוברים כוכבים.
+// היצור גדל מביצה לדרקון אמיתי. כל שלב הוא איור CC0 מ-public/images/creature/
+// (מקור: Superpowers Asset Packs — Sparklin Labs, CC0).
 export const creatureStages: CreatureStage[] = [
-  { level: 0, name: 'בֵּיצָה', icon: 'egg-easter.svg', starsRequired: 0, color: '#f4c95d' },
-  { level: 1, name: 'בּוֹקֵעַ', icon: 'egg-outline.svg', starsRequired: 8, color: '#f0a868' },
-  { level: 2, name: 'גּוֹזָל', icon: 'duck.svg', starsRequired: 20, color: '#ffd166' },
-  { level: 3, name: 'חֲבֵרוֹן', icon: 'bird.svg', starsRequired: 36, color: '#7ac74f' },
-  { level: 4, name: 'חַד-קֶרֶן צָעִיר', icon: 'unicorn-variant.svg', starsRequired: 58, color: '#5aa9e6' },
-  { level: 5, name: 'חַד-קֶרֶן קָסוּם', icon: 'unicorn.svg', starsRequired: 84, color: '#9b5de5' },
+  { level: 0, name: 'בֵּיצָה', icon: '0-egg.png', starsRequired: 0, color: '#f4c95d' },
+  { level: 1, name: 'סְלַיים קָטָן', icon: '1-slime.gif', starsRequired: 8, color: '#7ac74f' },
+  { level: 2, name: 'נָחָשׁ', icon: '2-snake.gif', starsRequired: 20, color: '#5aa9e6' },
+  { level: 3, name: 'זוֹחֵל', icon: '3-reptile.gif', starsRequired: 36, color: '#9b5de5' },
+  { level: 4, name: 'דַּיְנוֹ', icon: '4-dino.gif', starsRequired: 58, color: '#f0a868' },
+  { level: 5, name: 'דְּרָקוֹן אַדִּיר', icon: '5-dragon.gif', starsRequired: 84, color: '#ef476f' },
 ]
 
 export function creatureForStars(totalStars: number): CreatureStage {

@@ -122,6 +122,14 @@ button {
   border-radius: 50%;
   display: grid;
   place-items: center;
+  overflow: hidden;
+}
+.creature-img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  display: block;
 }
 
 .creature-banner .meta {

@@ -1,6 +1,6 @@
 import { creatureForStars, creatureStages, nextCreature } from '../data/creature'
 import type { Progress } from '../storage/progress'
-import { Pic } from '../components/Pic'
+import { CreatureImage } from '../components/CreatureAvatar'
 
 export function CreatureScreen({ progress }: { progress: Progress }) {
   const current = creatureForStars(progress.totalStars)
@@ -9,12 +9,7 @@ export function CreatureScreen({ progress }: { progress: Progress }) {
   return (
     <div>
       <div className="center-screen" style={{ paddingTop: 8, paddingBottom: 8 }}>
-        <div
-          className="creature-disc"
-          style={{ width: 160, height: 160, background: `${current.color}22` }}
-        >
-          <Pic file={current.icon} color={current.color} size={104} />
-        </div>
+        <CreatureImage icon={current.icon} color={current.color} alt={current.name} size={180} />
         <h1>{current.name}</h1>
         <p className="note">
           אָסַפְתָּ {progress.totalStars} כּוֹכָבִים ⭐
@@ -33,12 +28,7 @@ export function CreatureScreen({ progress }: { progress: Progress }) {
           const reached = progress.totalStars >= c.starsRequired
           return (
             <div key={c.level} className={`stage-card ${reached ? '' : 'locked'}`}>
-              <div
-                className="creature-disc"
-                style={{ width: 64, height: 64, background: `${c.color}22` }}
-              >
-                <Pic file={c.icon} color={c.color} size={40} />
-              </div>
+              <CreatureImage icon={c.icon} color={c.color} alt={c.name} size={72} />
               <span className="name">{c.name}</span>
               <span className="sub">{c.starsRequired} ⭐</span>
             </div>

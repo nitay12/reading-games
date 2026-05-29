@@ -1,6 +1,7 @@
 // מעתיק את כל אייקוני ה-SVG שבשימוש (לפי src/data) מחבילת @mdi/svg
-// אל public/images/icons/. מריצים: npm run sync-icons
-import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, copyFileSync } from 'node:fs'
+// אל public/images/icons/, ומסיר אייקונים יתומים שכבר לא בשימוש.
+// מריצים: npm run sync-icons
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, copyFileSync, unlinkSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -30,6 +31,17 @@ for (const name of [...names].sort()) {
   copied++
 }
 
+// מחיקת אייקונים יתומים שלא נמצאים יותר ב-data
+let removed = 0
+for (const f of readdirSync(outDir)) {
+  if (!f.endsWith('.svg')) continue
+  const base = f.replace(/\.svg$/, '')
+  if (!names.has(base)) {
+    unlinkSync(join(outDir, f))
+    removed++
+  }
+}
+
 const credits = `# קרדיטים לאיורים
 
 האייקונים באפליקציה לקוחים מ-**Material Design Icons** (Pictogrammers),
@@ -42,7 +54,7 @@ const credits = `# קרדיטים לאיורים
 `
 writeFileSync(join(outDir, 'CREDITS.md'), credits)
 
-console.log(`synced ${copied} icons -> public/images/icons/`)
+console.log(`synced ${copied} icons (-${removed} orphan) -> public/images/icons/`)
 if (missing.length) {
   console.error(`MISSING icons (not found in @mdi/svg): ${missing.join(', ')}`)
   process.exit(1)
