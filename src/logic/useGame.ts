@@ -22,8 +22,13 @@ export interface GameState {
   next: () => void
 }
 
+const MAX_ROUNDS_PER_SESSION = 10
+
 export function useGame(stage: Stage, onCorrect: () => void): GameState {
-  const queue = useMemo(() => shuffle(stage.words), [stage])
+  const queue = useMemo(
+    () => shuffle(stage.words).slice(0, MAX_ROUNDS_PER_SESSION),
+    [stage],
+  )
   const [index, setIndex] = useState(0)
   const [result, setResult] = useState<RoundResult>('idle')
   const [stars, setStars] = useState(0)
