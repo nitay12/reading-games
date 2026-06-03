@@ -51,13 +51,18 @@ button {
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 360px) {
+  .app {
+    padding: 0 10px 24px;
+  }
+}
 
 /* ---------- top bar ---------- */
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
   padding: 14px 6px 10px;
   position: sticky;
   top: 0;
@@ -70,6 +75,21 @@ button {
   gap: 10px;
   font-weight: 800;
   font-size: 1.05rem;
+  min-width: 0;
+}
+.topbar .brand span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 400px) {
+  .topbar .brand span {
+    display: none;
+  }
+  .stars-badge {
+    padding: 6px 10px;
+    font-size: 0.95rem;
+  }
 }
 
 .stars-badge {
@@ -277,10 +297,12 @@ button {
   line-height: 1.7;
   font-size: clamp(2.8rem, 13vw, 5rem);
   direction: rtl;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 .prompt .sentence {
-  font-size: clamp(1.8rem, 8vw, 3rem);
-  line-height: 2;
+  font-size: clamp(1.4rem, 7vw, 2.6rem);
+  line-height: 1.9;
 }
 .prompt .translit {
   color: var(--muted);
@@ -336,6 +358,11 @@ button {
 }
 .choices.word-mode {
   grid-template-columns: 1fr;
+}
+@media (max-width: 360px) {
+  .choices {
+    gap: 8px;
+  }
 }
 
 .choice {
@@ -515,9 +542,8 @@ input[type='range'] {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 24px 18px calc(24px + env(safe-area-inset-bottom));
-  gap: 18px;
-  min-height: 100vh;
+  padding: 16px 4px calc(20px + env(safe-area-inset-bottom));
+  gap: 16px;
 }
 .onboarding-skip {
   align-self: flex-start;
@@ -529,14 +555,15 @@ input[type='range'] {
 .onboarding-visual {
   display: grid;
   place-items: center;
-  min-height: 180px;
+  min-height: 140px;
   width: 100%;
   margin-top: 6px;
 }
 .onboarding-title {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
   margin: 0;
   line-height: 1.4;
+  padding: 0 8px;
 }
 .onboarding-body {
   background: #fff;
