@@ -4,6 +4,7 @@ export interface Progress {
   schemaVersion: 1
   totalStars: number
   stageStars: Record<string, number>
+  onboardingSeen: boolean
   settings: {
     ttsRate: number
     showTranslit: boolean
@@ -16,6 +17,7 @@ const defaultProgress = (): Progress => ({
   schemaVersion: 1,
   totalStars: 0,
   stageStars: {},
+  onboardingSeen: false,
   settings: { ttsRate: 0.85, showTranslit: false },
 })
 

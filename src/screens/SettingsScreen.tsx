@@ -6,10 +6,12 @@ export function SettingsScreen({
   progress,
   onChange,
   onReset,
+  onShowOnboarding,
 }: {
   progress: Progress
   onChange: (settings: Progress['settings']) => void
   onReset: () => void
+  onShowOnboarding: () => void
 }) {
   const speech = useSpeech(progress.settings.ttsRate)
   const [confirming, setConfirming] = useState(false)
@@ -59,6 +61,16 @@ export function SettingsScreen({
             onClick={() => onChange({ ...s, showTranslit: !s.showTranslit })}
             aria-label="תעתיק"
           />
+        </div>
+      </div>
+
+      <div className="settings-card">
+        <h3>עֶזְרָה</h3>
+        <div className="row">
+          <span>הַצֵּג שׁוּב אֶת הַהֶסְבֵּר לְהוֹרֶה</span>
+          <button className="speak-btn" onClick={onShowOnboarding}>
+            הַצֵּג
+          </button>
         </div>
       </div>
 

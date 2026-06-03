@@ -12,6 +12,7 @@ import { HomeMap } from './screens/HomeMap'
 import { GameScreen } from './screens/GameScreen'
 import { CreatureScreen } from './screens/CreatureScreen'
 import { SettingsScreen } from './screens/SettingsScreen'
+import { OnboardingScreen } from './screens/OnboardingScreen'
 import { CreatureAvatar } from './components/CreatureAvatar'
 
 type Screen =
@@ -19,10 +20,13 @@ type Screen =
   | { name: 'game'; stageId: string }
   | { name: 'creature' }
   | { name: 'settings' }
+  | { name: 'onboarding' }
 
 export default function App() {
   const [progress, setProgress] = useState<Progress>(() => loadProgress())
-  const [screen, setScreen] = useState<Screen>({ name: 'home' })
+  const [screen, setScreen] = useState<Screen>(() =>
+    loadProgress().onboardingSeen ? { name: 'home' } : { name: 'onboarding' },
+  )
   const [nonce, setNonce] = useState(0)
 
   useEffect(() => {
@@ -33,6 +37,19 @@ export default function App() {
     const stage = curriculum.stages.find((s) => s.id === stageId)
     if (!stage) return
     setProgress((p) => awardStars(p, stageId, stage.starsToComplete, 1).progress)
+  }
+
+  function finishOnboarding() {
+    setProgress((p) => ({ ...p, onboardingSeen: true }))
+    setScreen({ name: 'home' })
+  }
+
+  if (screen.name === 'onboarding') {
+    return (
+      <div className="app">
+        <OnboardingScreen onFinish={finishOnboarding} />
+      </div>
+    )
   }
 
   return (
@@ -95,6 +112,7 @@ export default function App() {
           progress={progress}
           onChange={(settings) => setProgress((p) => ({ ...p, settings }))}
           onReset={() => setProgress(resetProgress())}
+          onShowOnboarding={() => setScreen({ name: 'onboarding' })}
         />
       )}
     </div>
